@@ -1,7 +1,52 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<h1>Home</h1>
+<div class="container top-bar">
+            <a href="{% url 'home' %}" class="btn btn-primary">HOME</a>
+        </div>
+        <div class="container content-inner">
+            <div class="main-col">
+                <section class="jumbo-card card">
+                    <div class="card-image">
+                        <a href=""><img src="{% static 'images/card.jpg' %}" alt="" class="img-responsive"></a>
+                    </div>
+                   
+                    <div class="card-elements">
+                        <div class="card-header">
+                            <a href=""><h3> </h3></a>
+                            <p class="author"> |  </p>
+                        </div>
+                        <div class="card-copy">
+                            
+                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+                        </div>
+                    </div>
+                    
+                </section>
+            </div>
+            <div class="cards row">
+                <div class="card">
+                    <div class="card-image">
+                        <a href="">
+                            <img src="{% static 'images/card-1.jpg' %}" alt="">
+                        </a>
+                    </div>
+                    <div class="card-elements">
+                        <div class="card-header">
+                            <a href="">
+                                <h4></h4>
+                            </a>
+                            <p class="author"> |  </p>
+                        </div>
+                        <div class="card-copy">
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
 {% endblock %}
 
 
@@ -11,73 +56,3 @@
 
 
 
-<!--<!DOCTYPE html>
-<html lang="en">
- {% load staticfiles %}
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <title>The latest in stock news!</title>
-
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-        <link rel="icon" type="image/png" href="{% static 'devinterviewapp/img/facvicon.png' %}">
-        <link href="{% static 'devinterviewapp/css/bootstrap.min.css' %}" rel="stylesheet">
-        <link href="{% static 'devinterviewapp/css/font-awesome.min.css' %}" rel="stylesheet">
-        <link href="{% static 'devinterviewapp/css/style.css' %}" rel="stylesheet" type="text/css"/>
-    </head>
-    <body>
-        <div class="container top-bar">
-            <a href="{% url 'home' %}" class="btn btn-primary">HOME</a>
-        </div>
-        <div class="container content-inner">
-            <div class="main-col">
-                <section class="jumbo-card card">
-                    <div class="card-image">
-                        <a href="{% url 'article' %}"><img src="{% static 'devinterviewapp/images/card.jpg' %}" alt="" class="img-responsive"></a>
-                    </div>
-                    {% for jumboCards in jumboCards %}
-                    <div class="card-elements">
-                        <div class="card-header">
-                            <a href="{% url 'article' %}"><h3> {{ jumboCards.title }}</h3></a>
-                            <p class="author">{{ jumboCards.author_name }} | {{ jumboCards.created_at }} </p>
-                        </div>
-                        <div class="card-copy">
-                            {{ articles.text | safe }}
-                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </section>
-            </div>
-            <div class="cards row">
-                {% for articles in articles %}
-                <div class="card">
-                    <div class="card-image">
-                        <a href="{% url 'article' %}">
-                            <img src="{% static 'devinterviewapp/images/card-1.jpg' %}" alt="">
-                        </a>
-                    </div>
-                    <div class="card-elements">
-                        <div class="card-header">
-                            <a href="{% url 'article' articles.id %}">
-                                <h4>{{ articles.title }}</h4>
-                            </a>
-                            <p class="author">{{ articles.author_name }} | {{ articles.created_at }} </p>
-                        </div>
-                        <div class="card-copy">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-                        </div>
-                    </div>
-                </div>
-                 {% endfor %}
-            </div> 
-        </div>
-
-        <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/main.js' %}"></script>
-    </body>
-</html>-->
