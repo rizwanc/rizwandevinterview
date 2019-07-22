@@ -8,14 +8,14 @@
                     <div class="card-image">
                         <a href=""><img src="{% static 'images/card.jpg' %}" alt="" class="img-responsive"></a>
                     </div>
-                   
-                    <div class="card-elements">
-                        <div class="card-header">
-                            <a href=""><h3> </h3></a>
-                            <p class="author"> |  </p>
-                        </div>
-                        <div class="card-copy">
-                            
+                   {% for firstPromiseArticle in firstPromiseArticle %} 
+                        <div class="card-elements">
+                            <div class="card-header">
+                                <a href="{% url 'article' firstPromiseArticle.id %}"><h3>{{ firstPromiseArticle.title }}</h3></a>
+                                <p class="author"> {{ firstPromiseArticle.author_name.name }} | {{ firstPromiseArticle.created_at }} </p>
+                            </div>
+                            <div class="card-copy">
+                    {% endfor %}
                             <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
                         </div>
                     </div>
@@ -23,6 +23,7 @@
                 </section>
             </div>
             <div class="cards row">
+                {% for articleData in articleData %}
                 <div class="card">
                     <div class="card-image">
                         <a href="">
@@ -31,10 +32,10 @@
                     </div>
                     <div class="card-elements">
                         <div class="card-header">
-                            <a href="">
-                                <h4></h4>
+                            <a href="{% url 'article' articleData.id %}">
+                                <h4> {{ articleData.title }}</h4>
                             </a>
-                            <p class="author"> |  </p>
+                            <p class="author"> {{ articleData.author_name.name }} | {{ articleData.created_at }}  </p>
                         </div>
                         <div class="card-copy">
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -42,6 +43,7 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div> 
         </div>
 {% endblock %}

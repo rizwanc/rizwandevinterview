@@ -8,7 +8,7 @@ class Article(models.Model):
 	created_at = models.DateTimeField() 
 	tag = models.CharField(max_length=200, default='')
 	text = models.TextField() 
-	photo_main = models.ImageField(upload_to='photos')
+	photo_main = models.ImageField(upload_to='photos', blank=True)
 	photo_1 = models.ImageField(upload_to='photos', blank=True)
 	photo_2 = models.ImageField(upload_to='photos', blank=True)
 	photo_3 = models.ImageField(upload_to='photos', blank=True)
