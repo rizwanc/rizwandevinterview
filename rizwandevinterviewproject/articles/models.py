@@ -15,3 +15,13 @@ class Article(models.Model):
 	photo_4 = models.ImageField(upload_to='photos', blank=True)
 	def __str__(self):
 		return self.title
+
+
+class StockQuotes(models.Model):
+	CompanyName = models.CharField(max_length=200)
+	Symbol = models.CharField(max_length=10)
+	CurrentPrice = models.DecimalField(max_digits=10, decimal_places=2)
+	Change = models.DecimalField(max_digits=10, decimal_places=2)
+	PercentChange = models.DecimalField(max_digits=10, decimal_places=2)
+	def __str__(self):
+		return self.CompanyName
