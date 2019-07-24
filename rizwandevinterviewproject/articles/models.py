@@ -11,9 +11,9 @@ class Article(models.Model):
 	pitch = models.TextField()
 	disclosure = models.TextField()
 	text = models.TextField()
+	photo_main = models.ImageField(upload_to='photos')
 	def __str__(self):
 		return self.title
-
 
 class StockQuotes(models.Model):
 	CompanyName = models.CharField(max_length=200)
@@ -23,7 +23,6 @@ class StockQuotes(models.Model):
 	PercentChange = models.DecimalField(max_digits=10, decimal_places=2)
 	def __str__(self):
 		return self.CompanyName
-
 
 class Comments(models.Model):
 	article_id = models.ForeignKey(Article, on_delete=models.DO_NOTHING)

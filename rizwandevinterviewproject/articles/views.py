@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from random import randint
+from django.db.models import Q
 from datetime import datetime
 from .models import Article, StockQuotes, Comments
 from .forms import CommentForm
@@ -9,6 +10,7 @@ def article(request, article_id):
 	article = get_object_or_404(Article, pk=article_id)
 	stockQuotes = StockQuotes.objects.all()[:3] 
 	comments = Comments.objects.filter(article_id_id = article_id)
+	articleLinks = Article.objects.filter(~Q(pk=article_id))[:5]
 
 	if request.method == 'POST':
 		# A comment was posted
@@ -32,6 +34,7 @@ def article(request, article_id):
 	context = {
 	'article': article,
 	'stockQuotes': stockQuotes,
+	'articleLinks': articleLinks,
 	'comment_form': comment_form,
 	'comments': comments
 	}

@@ -4,11 +4,12 @@
 {% block content %}
         <div class="container content-inner">
             <div class="main-col">
+                <!-- output article with tag 10-promise -->
+                {% for firstPromiseArticle in firstPromiseArticle %} 
                 <section class="jumbo-card card">
                     <div class="card-image">
-                        <a href=""><img src="{% static 'images/card.jpg' %}" alt="" class="img-responsive"></a>
+                        <a href="{% url 'article' firstPromiseArticle.id %}"><img src="{{ firstPromiseArticle.photo_main.url }}" alt="" class="img-responsive"></a>
                     </div>
-                   {% for firstPromiseArticle in firstPromiseArticle %} 
                         <div class="card-elements">
                             <div class="card-header">
                                 <a href="{% url 'article' firstPromiseArticle.id %}"><h3>{{ firstPromiseArticle.title }}</h3></a>
@@ -19,15 +20,15 @@
                             {% endfor %}
                         </div>
                     </div>
-                    
                 </section>
             </div>
             <div class="cards row">
+                <!-- Output randome articles excluding the one above -->
                 {% for articleData in articleData %}
                 <div class="card">
                     <div class="card-image">
-                        <a href="">
-                            <img src="{% static 'images/card-1.jpg' %}" alt="">
+                        <a href="{% url 'article' articleData.id %}">
+                            <img src="{{ articleData.photo_main.url }}" alt="">
                         </a>
                     </div>
                     <div class="card-elements">
