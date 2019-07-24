@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -33,73 +34,68 @@
                     </div>
                     <section class="article-body">
                         <div class="article-content">
-
                             <!-- Article text-->
                             {{ article.text | safe }}
 
-                            <!--<div id="pitch">
-                                <p><strong></strong></p>
-                                <p><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit<br></strong>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.*</p>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the <strong><a href="#">majority have suffered alteration</a></strong> in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-                                <p>On November 10, David and Tom revealed what they believe are the <strong><a href="#">ten best stocks</a></strong> for investors to buy right now… and Tesla wasn't one of them! That's right -- they think these 10 stocks are even better buys.</p>
-                                <p><a class="btn" href="#">See the 10 stocks</a></p>
-                                <p><em><span>*Stock Advisor returns as of November 1, 2017</span></em></p>
+                            <!-- Pitch Text -->
+                            <div id="pitch">
+                                {{ article.pitch | safe }}
                             </div>
                         </div>
+
+                        <!-- Disclosure Text -->
                         <div class="article-disclosure">
-                            <p><em><a href="#">It is a long established</a> fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop <a href="#">publishing packages</a></em></p>
+                            {{ article.disclosure | safe }}
                         </div>
-                        <div class="special-message">
-                            <p><strong>At vero eos et accusamus et iusto odio dignissimos<br></strong>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
-                            <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment,</p>
-                            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                            <p><a class="btn" href="#">Learn more</a></p>
-                        </div>-->
                     </section>
+                    <section class="comment-section">
+                        <div id="comment-form">
+                            {% if comments.id %}
+                              <h2>Your comment has been added.</h2>
+                            {% else %}
+                            <h2>Add a new comment</h2>
+                           <form method="post">
+                                {{ comment_form.as_p }}
+                                {% csrf_token %}
+                                <button class="btn" type="submit">Add Comment</button>
+                            </form>
+                           {% endif %}
+                        </div>
 
-                    <div id="comment_form">
-                        {% if comments %}
-                          <h2>Your comment has been added.</h2>
-                        {% else %}
-                        <h2>Add a new comment</h2>
-                       <form method="post">
-                            {{ comment_form.as_p }}
-                            {% csrf_token %}
-                            <button type="submit">Add Comment</button>
-                        </form>
-                       {% endif %}
-                    </div>
+                         <div class="comment-count">
+                             {% with comments.count as total_comments %}
+                                  <h2>
+                                    {{ total_comments }} comment{{ total_comments|pluralize }}
+                                  </h2>
+                             {% endwith %}
+                        </div>
 
-                     {% with comments.count as total_comments %}
-                          <h2>
-                            {{ total_comments }} comment{{ total_comments|pluralize }}
-                          </h2>
-                     {% endwith %}
-
-                    <div id="comments">
-                         {% for comments in comments %}
-                            {{ comments.comment | linebreaks }}
-                        {% empty %}
-                        <p>There are no comments yet.</p>
-                        {% endfor %}
-                    </div>
-
+                        <div class="comments">
+                            {% for comments in comments %}
+                                 <p class="info">
+                                    Comment {{ forloop.counter }} {{ comments.created_at }}
+                                    </br>
+                                    {{ comments.comment }}
+                                </p> 
+                                {% empty %}
+                                <p>There are no comments yet.</p>
+                            {% endfor %}
+                        </div>
+                    </section>
                 </main>
                 <aside class="col-sm-5 col-md-4 p-l">
                     <section class="related-tickers">
                         <div class="block-title">
                             <hr><h2>Stocks</h2>
                         </div>
-                        
                         <div class="ticker-row">
                             {% for stockQuotes in stockQuotes %}
                             <div>
-                                <!--<span class="image-wrap">
+                                <!-- <span class="image-wrap">
                                     <a href="#">
-                                        <img src="images/related-1.png" class="img-responsive" alt="">
+                                        <img src="{% static 'images/related-1.png' %}" class="img-responsive" alt="">
                                     </a>
-                                </span>-->
+                                </span> -->
                                 <h3>{{ stockQuotes.CompanyName }}</h3>
                                 <h4>
                                     <span class="ticker">
@@ -122,7 +118,7 @@
                             </div>
                             {% endfor %}
                         </div>
-                         <button id="shuffle">Shuffle</button>
+                         <button class="btn" id="shuffle">Shuffle</button>
                     </section>
                     <section class="read-more-section">
                         <div class="block-title">

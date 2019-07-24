@@ -7,12 +7,10 @@ class Article(models.Model):
 	title = models.CharField(max_length=200)
 	created_at = models.DateTimeField() 
 	tag = models.CharField(max_length=200, default='')
-	text = models.TextField() 
-	photo_main = models.ImageField(upload_to='photos', blank=True)
-	photo_1 = models.ImageField(upload_to='photos', blank=True)
-	photo_2 = models.ImageField(upload_to='photos', blank=True)
-	photo_3 = models.ImageField(upload_to='photos', blank=True)
-	photo_4 = models.ImageField(upload_to='photos', blank=True)
+	promo = models.CharField(max_length=200)
+	pitch = models.TextField()
+	disclosure = models.TextField()
+	text = models.TextField()
 	def __str__(self):
 		return self.title
 
@@ -30,4 +28,5 @@ class StockQuotes(models.Model):
 class Comments(models.Model):
 	article_id = models.ForeignKey(Article, on_delete=models.DO_NOTHING)
 	comment = models.TextField()
+	created_at = models.DateTimeField() 
 

@@ -348,6 +348,24 @@ h4 {
     margin-bottom: 2em;
 }
 
+/*comment stye*/
+
+.comment-count {
+    margin-bottom: 2em;
+}
+
+.comments {
+    font-weight: bold;
+    width: 85%;
+}
+
+.comments :nth-child(even){
+  background-color: #ffffff;
+}
+.comments :nth-child(odd){
+  background-color: #dcdcdc;
+}
+
 .special-message {
     border: 1px solid #ddd;
     border-radius: 4px;
