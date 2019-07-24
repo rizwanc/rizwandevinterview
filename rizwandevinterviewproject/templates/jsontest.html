@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Comment form test!</title>
+</head>
+<body>
+	{% for comments in comments %}
+		<p>{{ comments.comment }}</p>
+	{% endfor %}
+	<form method="post">
+		{% csrf_token %}
+		{{ form }}
+		<button type="submit">Submit</button>
+	</form>
+	
+</body>
+</html>

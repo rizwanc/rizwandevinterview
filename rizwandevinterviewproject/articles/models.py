@@ -25,3 +25,9 @@ class StockQuotes(models.Model):
 	PercentChange = models.DecimalField(max_digits=10, decimal_places=2)
 	def __str__(self):
 		return self.CompanyName
+
+
+class Comments(models.Model):
+	article_id = models.ForeignKey(Article, on_delete=models.DO_NOTHING)
+	comment = models.TextField()
+

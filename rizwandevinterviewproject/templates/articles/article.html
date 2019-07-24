@@ -37,12 +37,12 @@
                             <!-- Article text-->
                             {{ article.text | safe }}
 
-                            <div id="pitch">
+                            <!--<div id="pitch">
                                 <p><strong></strong></p>
                                 <p><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit<br></strong>
                                     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.*</p>
                                 <p>There are many variations of passages of Lorem Ipsum available, but the <strong><a href="#">majority have suffered alteration</a></strong> in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-                                <!--<p>On November 10, David and Tom revealed what they believe are the <strong><a href="#">ten best stocks</a></strong> for investors to buy right now… and Tesla wasn't one of them! That's right -- they think these 10 stocks are even better buys.</p>-->
+                                <p>On November 10, David and Tom revealed what they believe are the <strong><a href="#">ten best stocks</a></strong> for investors to buy right now… and Tesla wasn't one of them! That's right -- they think these 10 stocks are even better buys.</p>
                                 <p><a class="btn" href="#">See the 10 stocks</a></p>
                                 <p><em><span>*Stock Advisor returns as of November 1, 2017</span></em></p>
                             </div>
@@ -55,8 +55,36 @@
                             <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment,</p>
                             <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
                             <p><a class="btn" href="#">Learn more</a></p>
-                        </div>
+                        </div>-->
                     </section>
+
+                    <div id="comment_form">
+                        {% if comments %}
+                          <h2>Your comment has been added.</h2>
+                        {% else %}
+                        <h2>Add a new comment</h2>
+                       <form method="post">
+                            {{ comment_form.as_p }}
+                            {% csrf_token %}
+                            <button type="submit">Add Comment</button>
+                        </form>
+                       {% endif %}
+                    </div>
+
+                     {% with comments.count as total_comments %}
+                          <h2>
+                            {{ total_comments }} comment{{ total_comments|pluralize }}
+                          </h2>
+                     {% endwith %}
+
+                    <div id="comments">
+                         {% for comments in comments %}
+                            {{ comments.comment | linebreaks }}
+                        {% empty %}
+                        <p>There are no comments yet.</p>
+                        {% endfor %}
+                    </div>
+
                 </main>
                 <aside class="col-sm-5 col-md-4 p-l">
                     <section class="related-tickers">
